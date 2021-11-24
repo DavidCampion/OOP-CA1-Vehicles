@@ -28,4 +28,22 @@ public class AppTest
         assertEquals(-6.4444, van.getDepotGPSLocation().getLongitude(),0.00005);
         assertEquals(240,van.getLoadSpace(),0.05);
     }
+
+    @Test
+    public void createCar()
+    {
+        Car car = new Car("Car","Volkswagen","Golf",4,"121LH2335",
+                6.00,2021,05,24,126000,53.2543,-6.4444,5);
+        assertEquals("Volkswagen", car.getMake());
+        assertEquals("Golf", car.getModel());
+        assertEquals("121LH2335", car.getRegistration());
+        assertEquals(6.00, car.getCostPerMile(),0.005);
+        assertEquals(2021, car.getLastServicedDate().getYear());
+        assertEquals(5, car.getLastServicedDate().getMonthValue());
+        assertEquals(24, car.getLastServicedDate().getDayOfMonth());
+        assertEquals(126000,car.getMileage());
+        assertEquals(53.2543, car.getDepotGPSLocation().getLatitude(),0.00005);
+        assertEquals(-6.4444, car.getDepotGPSLocation().getLongitude(),0.00005);
+        assertEquals(5,car.getNumSeats(),0.05);
+    }
 }
