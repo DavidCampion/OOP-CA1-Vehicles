@@ -39,7 +39,7 @@ public class VehicleManager {
                 int mileage = sc.nextInt();
                 double latitude = sc.nextDouble();  // Depot GPS location
                 double longitude = sc.nextDouble();
-                int loadSpace = sc.nextInt();
+                int loadSpaceOrSeats = sc.nextInt();
 
 
                 if (type.equalsIgnoreCase("Van") ||
@@ -49,14 +49,14 @@ public class VehicleManager {
                             registration, costPerMile,
                             year, month, day,
                             mileage, latitude, longitude,
-                            loadSpace));
+                            loadSpaceOrSeats));
                 } else if (type.equalsIgnoreCase("Car") || type.equalsIgnoreCase("4x4"))
                 {
                     vehicleList.add(new Car(id, type, make, model, milesPerKwH,
                             registration, costPerMile,
                             year, month, day,
                             mileage, latitude, longitude,
-                            loadSpace));
+                            loadSpaceOrSeats));
                 }
 
             }

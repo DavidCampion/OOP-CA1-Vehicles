@@ -28,6 +28,7 @@ public class App
         System.out.println("List of all passengers:");
         passengerStore.displayAllPassengers();
 
+        System.out.println("");
         VehicleManager vehicleManager = new VehicleManager("vehicles.txt");
         System.out.println("List of all Vehicles:");
         vehicleManager.displayAllVehicles();
