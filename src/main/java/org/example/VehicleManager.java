@@ -41,7 +41,6 @@ public class VehicleManager {
                 double longitude = sc.nextDouble();
                 int loadSpaceOrSeats = sc.nextInt();
 
-
                 if (type.equalsIgnoreCase("Van") ||
                         type.equalsIgnoreCase("Truck")) {
                     // construct a Van object and add it to the passenger list
