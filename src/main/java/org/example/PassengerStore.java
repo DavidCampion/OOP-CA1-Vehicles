@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class PassengerStore {
@@ -56,5 +57,21 @@ public class PassengerStore {
     }
 
     // TODO - see functional spec for details of code to add
+
+    public Passenger findPassengerByName(String name){
+        int i = 0;
+        for(Passenger r: passengerList) {
+            if (passengerList.get(i).getName().toLowerCase().contains(name.toLowerCase())) {
+                return r;
+            }
+            i++;
+        }
+        return null;
+    }
+
+    public void addPassenger(String name, String email, String phone, double latitude, double longitude){
+        int id = (passengerList.get(passengerList.size() - 1).getId())+1;
+        passengerList.add(new Passenger(id, name, email, phone, latitude, longitude));
+    }
 
 } // end class

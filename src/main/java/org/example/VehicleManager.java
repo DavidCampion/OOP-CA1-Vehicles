@@ -43,7 +43,7 @@ public class VehicleManager {
 
                 if (type.equalsIgnoreCase("Van") ||
                         type.equalsIgnoreCase("Truck")) {
-                    // construct a Van object and add it to the passenger list
+                    // construct a car object and add it to the passenger list
                     vehicleList.add(new Van(id, type, make, model, milesPerKwH,
                             registration, costPerMile,
                             year, month, day,
@@ -67,5 +67,31 @@ public class VehicleManager {
     }
 
     //TODO add more functionality as per spec.
+
+    public Vehicle findVehicleByRegistration(String reg) {
+        int i = 0;
+        for(Vehicle r: vehicleList) {
+            if (vehicleList.get(i).getRegistration().toLowerCase().contains(reg.toLowerCase())) {
+                return r;
+            }
+            i++;
+        }
+        return null;
+    }
+
+        public ArrayList<Vehicle> findByType(String type)
+    {
+        ArrayList<Vehicle> subset = new ArrayList<>();
+        int i = 0;
+        for(Vehicle r: vehicleList)
+        {
+            if(vehicleList.get(i).getType().toLowerCase().contains(type.toLowerCase()))
+            {
+                subset.add(r);
+            }
+            i++;
+        }
+        return subset;
+    }
 
 }
