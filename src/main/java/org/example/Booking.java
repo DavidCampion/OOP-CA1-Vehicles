@@ -1,17 +1,40 @@
 package org.example;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.chrono.ChronoLocalDateTime;
 
 class Booking
 {
+    private IdGenerator idGenerator = IdGenerator.getInstance("next-id-store.txt");
     private int bookingId;
-    private int passengerId;
     private int vehicleId;
+    private int passengerId;
     private LocalDateTime bookingDateTime;
     private LocationGPS startLocation;
     private LocationGPS endLocation;
 
     private double cost;  //Calculated at booking time
+
+    public Booking(LocalDateTime bookingDateTime, double slatitude, double slongitude, double elatitude, double elongitude, int vehicleId, int passengerId, double cost) {
+        this.bookingDateTime = bookingDateTime;
+        this.startLocation = new LocationGPS(slatitude, slongitude);
+        this.endLocation = new LocationGPS(elatitude, elongitude);
+        this.vehicleId = vehicleId;
+        this.passengerId = passengerId;
+        this.cost = cost;
+    }
+
+    public Booking(int bookingId, LocalDateTime bookingDateTime, double slatitude, double slongitude, double elatitude, double elongitude, int vehicleId, int passengerId, double cost) {
+        this.bookingId = idGenerator.getNextId();
+        this.bookingDateTime = bookingDateTime;
+        this.startLocation = new LocationGPS(slatitude, slongitude);
+        this.endLocation = new LocationGPS(elatitude, elongitude);
+        this.vehicleId = vehicleId;
+        this.passengerId = passengerId;
+        this.cost = cost;
+    }
 
     //TODO - see specification
 
@@ -83,4 +106,5 @@ class Booking
                 ", cost=" + cost +
                 '}';
     }
+
 }

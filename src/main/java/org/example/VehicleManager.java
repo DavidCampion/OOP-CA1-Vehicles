@@ -79,7 +79,7 @@ public class VehicleManager {
         return null;
     }
 
-        public ArrayList<Vehicle> findByType(String type)
+    public ArrayList<Vehicle> findByType(String type)
     {
         ArrayList<Vehicle> subset = new ArrayList<>();
         int i = 0;
@@ -93,5 +93,38 @@ public class VehicleManager {
         }
         return subset;
     }
+
+    public int bookingVehicle()
+    {
+        Scanner kb = new Scanner(System.in);
+        int i = 1;
+        boolean isNumber;
+        System.out.println("-------------------------------------------------------------------------------------");
+        System.out.printf("%-10s\n", "Vehicle #");
+        for (Vehicle d : vehicleList) {
+            System.out.printf("%-10s%-15s%-10s%-10s\n", "Vehicle: "+(i++), " " + d.getMake(), " Type: \t" + d.getType(), " Mileage: \t" + d.getMileage(), " Cost: \t" + d.getCostPerMile());
+        }
+        System.out.println("-------------------------------------------------------------------------------------");
+        System.out.println("Please enter a number between 1 and " + (vehicleList.size()) + " to see more detail");
+        //validation UserInput
+        do {
+            if (kb.hasNextInt()) {
+                int pos = kb.nextInt() - 1;
+                isNumber = true;
+
+                return vehicleList.get(pos).getId();
+
+            } else {
+                System.out.println("Please enter a NUMBER!!! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+
+        return 0;
+
+    }
+
+
 
 }

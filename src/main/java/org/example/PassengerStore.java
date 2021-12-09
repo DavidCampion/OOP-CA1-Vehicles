@@ -74,4 +74,34 @@ public class PassengerStore {
         passengerList.add(new Passenger(id, name, email, phone, latitude, longitude));
     }
 
+    public int bookingPassenger()
+    {
+        Scanner kb = new Scanner(System.in);
+        int i = 1;
+        boolean isNumber;
+        System.out.println("-------------------------------------------------------------------------------------");
+        System.out.printf("%-10s\n", "Passengers #");
+        for (Passenger d : passengerList) {
+            System.out.printf("%-10s%-15s%-20s%-20s\n", "Name: "+(i++), " " + d.getName(), " Email: \t" + d.getEmail(), " Phone: \t" + d.getPhone());
+        }
+        System.out.println("-------------------------------------------------------------------------------------");
+        System.out.println("Please enter a number between 1 and " + (passengerList.size()) + " to see more detail");
+        //validation UserInput
+        do {
+            if (kb.hasNextInt()) {
+                int pos = kb.nextInt() - 1;
+                isNumber = true;
+                return passengerList.get(pos).getId();
+
+            } else {
+                System.out.println("Please enter a NUMBER!!! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+
+        return 0;
+
+    }
+
 } // end class
