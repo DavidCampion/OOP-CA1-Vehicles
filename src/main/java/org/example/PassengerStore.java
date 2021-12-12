@@ -69,6 +69,18 @@ public class PassengerStore {
         return null;
     }
 
+    public int findBookingByPassengerName(String name){
+        int test = 0;
+        int i = 0;
+        for(Passenger r: passengerList) {
+            if (passengerList.get(i).getName().toLowerCase().contains(name.toLowerCase())) {
+                test = passengerList.get(i).getId();
+            }
+            i++;
+        }
+        return test;
+    }
+
     public void addPassenger(String name, String email, String phone, double latitude, double longitude){
         int id = (passengerList.get(passengerList.size() - 1).getId())+1;
         passengerList.add(new Passenger(id, name, email, phone, latitude, longitude));
@@ -82,10 +94,10 @@ public class PassengerStore {
         System.out.println("-------------------------------------------------------------------------------------");
         System.out.printf("%-10s\n", "Passengers #");
         for (Passenger d : passengerList) {
-            System.out.printf("%-10s%-15s%-20s%-20s\n", "Name: "+(i++), " " + d.getName(), " Email: \t" + d.getEmail(), " Phone: \t" + d.getPhone());
+            System.out.printf("%-10s%-15s%-20s%-20s\n", "Name: "+(i++) + d.getName(), " Email: \t" + d.getEmail(), " Phone: \t" + d.getPhone());
         }
         System.out.println("-------------------------------------------------------------------------------------");
-        System.out.println("Please enter a number between 1 and " + (passengerList.size()) + " to see more detail");
+        System.out.println("Please enter a number between 1 and " + (passengerList.size()) + " to created booking for selected passenger");
         //validation UserInput
         do {
             if (kb.hasNextInt()) {
@@ -101,6 +113,55 @@ public class PassengerStore {
         } while (!(isNumber));
 
         return 0;
+
+    }
+
+    public void displayPassengersAll() {
+        int i = 0;
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%-20s%-20s%-20s%-30s%-50s\n", "Passenger ID:", "Name:", "Phone:", "Email:", "Location:");
+        for(Passenger p : passengerList)
+        {
+            System.out.printf("%-20s%-20s%-20s%-30s%-50s\n", "#" + p.getId(), p.getName(), p.getPhone(), p.getEmail(), p.getLocation());
+        }
+        System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
+    }
+
+    public void deletePassenger() {
+        Scanner kb = new Scanner(System.in);
+        System.out.println("Please enter the passenger id of the passenger you would like to delete: ");
+        displayPassengersAll();
+        //validation UserInput
+        String message = "Passenger Not Found";
+
+        int delete = 0;
+        boolean isNumber;
+        do {
+            if (kb.hasNextInt())
+            {
+                delete = kb.nextInt();
+                for(int i = 0; i < passengerList.size(); i++)
+                {
+                    if(passengerList.get(i).getId() == delete)
+                    {
+                        passengerList.remove(i);
+                        message = "You successfully deleted Passenger #" + (delete);
+                    }
+                }
+                isNumber = true;
+            }
+            else
+            {
+                System.out.println("Please enter an Passenger ID to delete a Passenger!!! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+        kb.nextLine();
+
+        System.out.println(message);
+
+        displayPassengersAll();
 
     }
 

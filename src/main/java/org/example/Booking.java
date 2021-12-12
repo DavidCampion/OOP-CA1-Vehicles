@@ -7,7 +7,7 @@ import java.time.chrono.ChronoLocalDateTime;
 
 class Booking
 {
-    private IdGenerator idGenerator = IdGenerator.getInstance("next-id-store.txt");
+    private IdGenerator idGenerator = IdGenerator.getInstance("bookings.txt");
     private int bookingId;
     private int vehicleId;
     private int passengerId;
@@ -18,6 +18,7 @@ class Booking
     private double cost;  //Calculated at booking time
 
     public Booking(LocalDateTime bookingDateTime, double slatitude, double slongitude, double elatitude, double elongitude, int vehicleId, int passengerId, double cost) {
+        this.bookingId = idGenerator.getNextId();
         this.bookingDateTime = bookingDateTime;
         this.startLocation = new LocationGPS(slatitude, slongitude);
         this.endLocation = new LocationGPS(elatitude, elongitude);
@@ -27,7 +28,7 @@ class Booking
     }
 
     public Booking(int bookingId, LocalDateTime bookingDateTime, double slatitude, double slongitude, double elatitude, double elongitude, int vehicleId, int passengerId, double cost) {
-        this.bookingId = idGenerator.getNextId();
+        this.bookingId = bookingId;
         this.bookingDateTime = bookingDateTime;
         this.startLocation = new LocationGPS(slatitude, slongitude);
         this.endLocation = new LocationGPS(elatitude, elongitude);

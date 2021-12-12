@@ -102,10 +102,10 @@ public class VehicleManager {
         System.out.println("-------------------------------------------------------------------------------------");
         System.out.printf("%-10s\n", "Vehicle #");
         for (Vehicle d : vehicleList) {
-            System.out.printf("%-10s%-15s%-10s%-10s\n", "Vehicle: "+(i++), " " + d.getMake(), " Type: \t" + d.getType(), " Mileage: \t" + d.getMileage(), " Cost: \t" + d.getCostPerMile());
+            System.out.printf("%-10s%-15s%-10s%-10s\n", "#"+i++, "Make: " + d.getMake(), " Type: \t" + d.getType(), " Mileage: \t" + d.getMileage(), " Cost: \t" + d.getCostPerMile());
         }
         System.out.println("-------------------------------------------------------------------------------------");
-        System.out.println("Please enter a number between 1 and " + (vehicleList.size()) + " to see more detail");
+        System.out.println("Please enter a number between 1 and " + (vehicleList.size()) + " to Book selected Vehicle");
         //validation UserInput
         do {
             if (kb.hasNextInt()) {
@@ -125,6 +125,53 @@ public class VehicleManager {
 
     }
 
+    public void displayVehiclesAll() {
+        int i = 0;
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.printf("%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-25s%-50s\n", "Vehicle ID:", "Vehicle Make:", "Vehicle Model:", "Vehicle Type:", "Mileage:", "Cost Per Mile:", "Miles Per KM:", "Vehicle Reg:", "Last Serviced Date:", "Depot Location:");
+        for(Vehicle d : vehicleList)
+        {
+            System.out.printf("%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-20s%-25s%-50s\n", "#" + d.getId(), d.getMake(), d.getModel(), d.getType(), d.getMileage(), d.getCostPerMile(), d.getMilesPerKm(), d.getRegistration(), d.getLastServicedDate(), d.getDepotGPSLocation());
+        }
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+    }
 
+    public void deleteVehicle() {
+        Scanner kb = new Scanner(System.in);
+        System.out.println("Please enter the Vehicle id of the vehicle you would like to delete: ");
+        displayVehiclesAll();
+        //validation UserInput
+        String message = "Vehicle Not Found";
+
+        int delete = 0;
+        boolean isNumber;
+        do {
+            if (kb.hasNextInt())
+            {
+                delete = kb.nextInt();
+                for(int i = 0; i < vehicleList.size(); i++)
+                {
+                    if(vehicleList.get(i).getId() == delete)
+                    {
+                        vehicleList.remove(i);
+                        message = "You successfully deleted Vehicle #" + (delete);
+                    }
+                }
+                isNumber = true;
+            }
+            else
+            {
+                System.out.println("Please enter an Vehicle ID to delete a Vehicle!!! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+        kb.nextLine();
+
+        System.out.println(message);
+
+        displayVehiclesAll();
+
+    }
 
 }
