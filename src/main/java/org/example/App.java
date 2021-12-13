@@ -187,7 +187,7 @@ public class App {
                 + "2. Find Vehicles By Registration\n"
                 + "3. Find Vehicles By Type \n"
                 + "4. Back to Main Menu\n"
-                + "Enter Option [1-7]";
+                + "Enter Option [1-4]";
 
         final int SHOW_ALL_V = 1;
         final int FIND_BY_REG = 2;
