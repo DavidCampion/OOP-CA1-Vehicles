@@ -143,4 +143,16 @@ public class BookingManager
 
     }
 
+    public void editBooking(int pos, int bID, LocalDateTime dateBooking, double sLat, double sLong, double eLat, double eLong, int vID, int pID, double cost) {
+        bID = bookingList.get(pos).getBookingId();
+
+        Booking editBook = new Booking(bID, dateBooking, sLat, sLong, eLat, eLong, vID, pID, cost);
+
+        bookingList.set(pos, editBook);
+
+        System.out.println("The Booking is Edited");
+        System.out.println("******************************");
+        displayBookingsAll();
+}
+
 }

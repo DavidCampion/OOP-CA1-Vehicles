@@ -94,7 +94,7 @@ public class PassengerStore {
         System.out.println("-------------------------------------------------------------------------------------");
         System.out.printf("%-10s\n", "Passengers #");
         for (Passenger d : passengerList) {
-            System.out.printf("%-10s%-15s%-20s%-20s\n", "Name: "+(i++) + d.getName(), " Email: \t" + d.getEmail(), " Phone: \t" + d.getPhone());
+            System.out.printf("%-10s%-20s%-20s%-20s\n", "#"+(i++), " Name: " + d.getName(), " Email: \t" + d.getEmail(), " Phone: \t" + d.getPhone());
         }
         System.out.println("-------------------------------------------------------------------------------------");
         System.out.println("Please enter a number between 1 and " + (passengerList.size()) + " to created booking for selected passenger");
@@ -118,13 +118,13 @@ public class PassengerStore {
 
     public void displayPassengersAll() {
         int i = 0;
-        System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
         System.out.printf("%-20s%-20s%-20s%-30s%-50s\n", "Passenger ID:", "Name:", "Phone:", "Email:", "Location:");
         for(Passenger p : passengerList)
         {
             System.out.printf("%-20s%-20s%-20s%-30s%-50s\n", "#" + p.getId(), p.getName(), p.getPhone(), p.getEmail(), p.getLocation());
         }
-        System.out.println("-----------------------------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 
     public void deletePassenger() {
@@ -163,6 +163,78 @@ public class PassengerStore {
 
         displayPassengersAll();
 
+    }
+
+    public void editPassenger()
+    {
+        displayPassengersAll();
+        Scanner kb1 = new Scanner(System.in);
+        boolean isNumber;
+        System.out.println();
+        System.out.println("Enter a number to change the corresponding matches results");
+        System.out.println("--------------------------------------------------------------------------------------------------------");
+
+        int pos = 0;
+        do {
+            if (kb1.hasNextInt()) {
+                pos = kb1.nextInt()-1;
+                isNumber = true;
+            } else {
+                System.out.println("Please enter a NUMBER to change Passenger!!! ");
+                isNumber = false;
+                kb1.next();
+            }
+        } while (!(isNumber));
+
+        System.out.println("To Edit a Passenger you should enter: Name, Email, Phone Number, Longitude and Latitude");
+        System.out.println("--------------------------------------------------------------------------------------------------------");
+        Scanner kb = new Scanner(System.in);
+
+        System.out.println("Enter Passenger Name: ");
+        String pName = kb.nextLine();
+        System.out.println("Enter Passenger Email: ");
+        String pMail = kb.nextLine();
+        System.out.println("Enter Phone Number: ");
+        String pNum = kb.nextLine();
+
+        int pLong = 0;
+        System.out.println("Please enter Passengers Location - ");
+        System.out.println("Enter Longitude: ");
+        do {
+            if (kb.hasNextInt()) {
+                pLong = kb.nextInt();
+                isNumber = true;
+            } else {
+                System.out.println("Please enter a NUMBER for Longitude! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+        kb.nextLine();
+
+        int pLat = 0;
+        System.out.println("Enter Latitude: ");
+        do {
+            if (kb.hasNextInt()) {
+                pLat = kb.nextInt();
+                isNumber = true;
+            } else {
+                System.out.println("Please enter a NUMBER for Latitude! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+        kb.nextLine();
+
+        int pID = passengerList.get(pos).getId();
+
+        Passenger editPass = new Passenger(pID, pName, pMail, pNum, pLat, pLong);
+
+        passengerList.set(pos, editPass);
+
+        System.out.println("The Passenger is Edited");
+        System.out.println("******************************");
+        displayPassengersAll();
     }
 
 } // end class

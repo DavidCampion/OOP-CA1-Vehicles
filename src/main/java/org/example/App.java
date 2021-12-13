@@ -163,7 +163,7 @@ public class App {
                         passengerStore.deletePassenger();
                         break;
                     case EDIT_Pass:
-
+                        passengerStore.editPassenger();
                         break;
                     case EXIT:
                         System.out.println("Back to main Menu option chosen");
@@ -186,17 +186,13 @@ public class App {
                 + "1. Show all Vehicles\n"
                 + "2. Find Vehicles By Registration\n"
                 + "3. Find Vehicles By Type \n"
-                + "4. Delete Vehicle \n"
-                + "5. Edit Vehicle \n"
-                + "6. Back to Main Menu\n"
-                + "Enter Option [1-4]";
+                + "4. Back to Main Menu\n"
+                + "Enter Option [1-7]";
 
         final int SHOW_ALL_V = 1;
         final int FIND_BY_REG = 2;
         final int FIND_BY_TYPE = 3;
-        final int DELETE_V = 4;
-        final int EDIT_V = 5;
-        final int EXIT = 6;
+        final int EXIT = 4;
 
         Scanner keyboard = new Scanner(System.in);
         int option = 0;
@@ -232,12 +228,6 @@ public class App {
                             System.out.println("No vehicle with registration "+ needle + " was found.");
                         else
                             System.out.println("Found Vehicle: " + t);
-                        break;
-                    case DELETE_V:
-                        vehicleManager.deleteVehicle();
-                        break;
-                    case EDIT_V:
-
                         break;
                     case EXIT:
                         System.out.println("Back to main Menu option chosen");
@@ -297,7 +287,7 @@ public class App {
                         bookingManager.deleteBooking();
                         break;
                     case EDIT_BOOKING:
-
+                       editBooking();
                         break;
                     case EXIT:
                         System.out.println("Back to main Menu option chosen");
@@ -584,6 +574,175 @@ public class App {
         bookingManager.addBooking(dateBooking, sLat, sLong, eLat, eLong, vID, pID, cost);
         System.out.println("The new Booking is Entered");
         System.out.println("******************************");
+    }
+
+    public void editBooking()
+    {
+        bookingManager.displayBookingsAll();
+        Scanner kb1 = new Scanner(System.in);
+        boolean isNumber;
+        System.out.println();
+        System.out.println("Enter a number to change the corresponding Booking");
+        System.out.println("--------------------------------------------------------------------------------------------------------");
+
+        int pos = 0;
+        do {
+            if (kb1.hasNextInt()) {
+                pos = kb1.nextInt()-1;
+                isNumber = true;
+            } else {
+                System.out.println("Please enter a NUMBER to change Booking!!! ");
+                isNumber = false;
+                kb1.next();
+            }
+        } while (!(isNumber));
+
+        System.out.println("To Edit a Booking you should enter: Date, Time, Start Latitude, Start Longitude, End Latitude and End Longitude");
+        System.out.println("The Price will be recalculated once all these details are collected!");
+        System.out.println("--------------------------------------------------------------------------------------------------------");
+        Scanner kb = new Scanner(System.in);
+
+        //validation UserInput
+        int bYear = 1900;
+        int bMonth = 01;
+        int bDay = 01;
+        int bHour = 00;
+        int bMinute = 00;
+
+        System.out.println("Please enter Booking Date - ");
+        System.out.println("Enter Year of booking: ");
+        do {
+            if (kb.hasNextInt()) {
+                bYear = kb.nextInt();
+                isNumber = true;
+            } else {
+                System.out.println("Please enter a NUMBER for Year! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+        kb.nextLine();
+
+        System.out.println("Enter Month of booking: ");
+        do {
+            if (kb.hasNextInt()) {
+                bMonth = kb.nextInt();
+                isNumber = true;
+            } else {
+                System.out.println("Please enter a NUMBER for Month! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+        kb.nextLine();
+
+        System.out.println("Enter Day of booking: ");
+        do {
+            if (kb.hasNextInt()) {
+                bDay = kb.nextInt();
+                isNumber = true;
+            } else {
+                System.out.println("Please enter a NUMBER for Day! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+        kb.nextLine();
+
+        System.out.println("Please enter Booking Time - ");
+        System.out.println("Enter hour of booking: ");
+        do {
+            if (kb.hasNextInt()) {
+                bHour = kb.nextInt();
+                isNumber = true;
+            } else {
+                System.out.println("Please enter a NUMBER for Day! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+        kb.nextLine();
+
+        System.out.println("Enter minute of booking: ");
+        do {
+            if (kb.hasNextInt()) {
+                bMinute = kb.nextInt();
+                isNumber = true;
+            } else {
+                System.out.println("Please enter a NUMBER for Day! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+        kb.nextLine();
+
+        LocalDateTime dateBooking = LocalDateTime.of(bYear, bMonth, bDay, bHour, bMinute);
+
+        double sLat = 0.0;
+        System.out.println("Please enter Passengers start Location - ");
+        System.out.println("Enter Latitude: ");
+        do {
+            if (kb.hasNextDouble()) {
+                sLat = kb.nextInt();
+                isNumber = true;
+            } else {
+                System.out.println("Please enter a NUMBER for Latitude! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+        kb.nextLine();
+
+        double sLong = 0.0;
+        System.out.println("Enter Longitude: ");
+        do {
+            if (kb.hasNextDouble()) {
+                sLong = kb.nextInt();
+                isNumber = true;
+            } else {
+                System.out.println("Please enter a NUMBER for Longitude! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+        kb.nextLine();
+
+        double eLat = 0;
+        System.out.println("Please enter Passengers End Location - ");
+        System.out.println("Enter Latitude: ");
+        do {
+            if (kb.hasNextDouble()) {
+                eLat = kb.nextInt();
+                isNumber = true;
+            } else {
+                System.out.println("Please enter a NUMBER for Latitude! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+        kb.nextLine();
+
+        double eLong = 0;
+        System.out.println("Enter Longitude: ");
+        do {
+            if (kb.hasNextDouble()) {
+                eLong = kb.nextInt();
+                isNumber = true;
+            } else {
+                System.out.println("Please enter a NUMBER for Longitude! ");
+                isNumber = false;
+                kb.next();
+            }
+        } while (!(isNumber));
+        kb.nextLine();
+
+        int vID = vehicleManager.bookingVehicle();
+        int pID = passengerStore.bookingPassenger();
+        double cost = 0.0;
+        int bID = 0;
+
+        bookingManager.editBooking(pos, bID, dateBooking, sLat, sLong, eLat, eLong, vID, pID, cost);
+
     }
 
 

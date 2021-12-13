@@ -136,42 +136,4 @@ public class VehicleManager {
         System.out.println("--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 
-    public void deleteVehicle() {
-        Scanner kb = new Scanner(System.in);
-        System.out.println("Please enter the Vehicle id of the vehicle you would like to delete: ");
-        displayVehiclesAll();
-        //validation UserInput
-        String message = "Vehicle Not Found";
-
-        int delete = 0;
-        boolean isNumber;
-        do {
-            if (kb.hasNextInt())
-            {
-                delete = kb.nextInt();
-                for(int i = 0; i < vehicleList.size(); i++)
-                {
-                    if(vehicleList.get(i).getId() == delete)
-                    {
-                        vehicleList.remove(i);
-                        message = "You successfully deleted Vehicle #" + (delete);
-                    }
-                }
-                isNumber = true;
-            }
-            else
-            {
-                System.out.println("Please enter an Vehicle ID to delete a Vehicle!!! ");
-                isNumber = false;
-                kb.next();
-            }
-        } while (!(isNumber));
-        kb.nextLine();
-
-        System.out.println(message);
-
-        displayVehiclesAll();
-
-    }
-
 }
